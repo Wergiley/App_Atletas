@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliação de Atletas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Avaliação de Atletas</h1>
+
+<div class="container">
+
+    <label>Nome do Atleta:</label>
+    <input type="text" id="nome">
+
+    <label>Notas (5 valores separados por vírgula):</label>
+    <input type="text" id="notas" placeholder="Ex: 10, 9.5, 8, 9, 10">
+
+    <button onclick="adicionarAtleta()">Adicionar Atleta</button>
+
+    <div class="resultado" id="resultado">
+        <h3>Atletas cadastrados:</h3>
+    </div>
+
+</div>
+<!-- Firebase v12 usando módulos ES -->
+<script type="module">
+
+    // Importando SDK principal e Firestore
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+    // Configuração do seu projeto
+    const firebaseConfig = {
+        apiKey: "AIzaSyB9xF1enFCn7yOjTGU1wLJxuzdabvnApN0",
+        authDomain: "projeto-1---atletas.firebaseapp.com",
+        projectId: "projeto-1---atletas",
+        storageBucket: "projeto-1---atletas.firebasestorage.app",
+        messagingSenderId: "767902575308",
+        appId: "1:767902575308:web:be76df94a1ca0af53eb069",
+        measurementId: "G-72V909M4RC"
+    };
+
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Inicializar Firestore
+    const db = getFirestore(app);
+
+    // Expor globalmente para script.js
+    window.db = db;
+
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
