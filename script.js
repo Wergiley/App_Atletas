@@ -1,28 +1,70 @@
-// Código para o Projeto 1 com interface HTML e CSS
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+// =========================
+// LISTA ESTÁTICA DE ATLETAS (SEUS DADOS)
+// =========================
 
-await addDoc(collection(db, "atletas"), {
-    nome,
-    notas,
-    media,
-    criadoEm: Date.now()
-});
+let atletas = [
+    {
+        nome: "Cesar Abascal",
+        notas: [10, 10, 7.88, 8.42, 9.34]
+    },
+    {
+        nome: "Fernando Puntel",
+        notas: [10, 10, 7, 8, 9.33]
+    },
+    {
+        nome: "Daiane Jelinsky",
+        notas: [10, 7, 8, 9.5, 9.5]
+    },
+    {
+        nome: "Bruno Castro",
+        notas: [10, 10, 10, 9, 9.5]
+    }
+];
+
+
+// =========================
+// CÁLCULO DA MÉDIA VÁLIDA
+// =========================
+// Remove menor e maior nota e faz a média das 3 restantes.
 
 function calcularMedia(notas) {
-    let ordenadas = notas.sort((a, b) => a - b);
+    let ordenadas = [...notas].sort((a, b) => a - b);
     let meio = ordenadas.slice(1, 4);
 
-    let soma = 0;
-    meio.forEach(n => soma += n);
+    let soma = meio.reduce((acc, n) => acc + n, 0);
 
     return soma / meio.length;
 }
+
+
+// =========================
+// EXIBIR ATLETAS NA TELA
+// =========================
+
+function exibirAtletas() {
+    let resultado = document.getElementById("resultado");
+    resultado.innerHTML = "<h3>Atletas cadastrados:</h3>";
+
+    atletas.forEach(atleta => {
+        let media = calcularMedia(atleta.notas);
+
+        let card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <p class="nome">Atleta: ${atleta.nome}</p>
+            <p class="notas">Notas Obtidas: ${atleta.notas.join(", ")}</p>
+            <p>Média Válida: ${media.toFixed(5)}</p>
+        `;
+
+        resultado.appendChild(card);
+    });
+}
+
+
+// =========================
+// ADICIONAR NOVO ATLETA
+// =========================
 
 function adicionarAtleta() {
     let nome = document.getElementById("nome").value;
@@ -33,85 +75,21 @@ function adicionarAtleta() {
         return;
     }
 
-    let notas = notasInput.split(", ").map(n => parseFloat(n.trim()));
+    let notas = notasInput.split(",").map(n => parseFloat(n.trim()));
 
-    if (notas.length !== 5) {
-        alert("Digite exatamente 5 notas!");
+    if (notas.length !== 5 || notas.some(n => isNaN(n))) {
+        alert("Digite exatamente 5 notas válidas!");
         return;
     }
 
-    let media = calcularMedia(notas);
+    atletas.push({ nome, notas });
 
-    let resultado = document.getElementById("resultado");
-
-    let card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-        <p class="nome">Atleta: ${nome}</p>
-        <p class="notas">Notas Obtidas: ${notas.join(", ")}</p>
-        <p>Média Válida: ${media.toFixed(5)}</p>
-    `;
-
-    resultado.appendChild(card);
+    exibirAtletas();
 
     document.getElementById("nome").value = "";
     document.getElementById("notas").value = "";
 }
 
 
-
-// Código do Projeto 1
-/*
-function calcularNotas(atletas) {
-
-  for (let i = 0; i < atletas.length; i++) {
-    let nome = atletas[i].nome;
-    let notas = atletas[i].notas;
-
-    // Ordena as notas
-    notas = notas.sort((a, b) => a - b);
-
-    // Elimina a menor (posição 0) e a maior (posição 4)
-    let notasComputadas = notas.slice(1, 4);
-
-    // Soma das notas computadas
-    let soma = 0;
-    notasComputadas.forEach(function(nota) {
-      soma += nota;
-    });
-
-    // Média
-    let media = soma / notasComputadas.length;
-
-    // Exibição do Dados
-    console.log(`Atleta: ${nome}`);
-    console.log(`Notas Obtidas: ${notas.join(",")}`);
-    console.log(`Média Válida: ${media}`);
-    console.log(); // linha em branco
-  }
-}
-
-// Entrada de Dados
-let atletas = [
- {
-   nome: "Cesar Abascal",
-   notas: [10, 9.34, 8.42, 10, 7.88]
- },
- {
-   nome: "Fernando Puntel",
-   notas:  [8, 10, 10, 7, 9.33]
- },
- {
-   nome: "Daiane Jelinsky",
-   notas: [7, 10, 9.5, 9.5, 8]
- },
- {
-   nome: "Bruno Castro",
-   notas: [10, 10, 10, 9, 9.5]
- }
-];
-
-// Executa
-calcularNotas(atletas);
-*/
+// Exibir lista inicial ao carregar
+window.onload = exibirAtletas;
