@@ -26,7 +26,7 @@ function atualizarAtletas() {
         card.innerHTML = `
             <p class="nome">Atleta: ${atleta.nome}</p>
             <p class="notas">Notas Obtidas: ${atleta.notas.join(", ")}</p>
-            <p>Média Válida: ${media.toFixed(5)}</p>
+            <p>Média Válida: ${media.toFixed(2)}</p>
             <button class="btn-excluir" onclick="excluirAtleta(${index})">Excluir</button>
         `;
         resultado.appendChild(card);
@@ -34,8 +34,7 @@ function atualizarAtletas() {
 
     atualizarRanking();
 }
-
-// Ranking lateral
+// Ranking lateral atualizado
 function atualizarRanking() {
     const rankingDiv = document.getElementById("ranking-list");
     rankingDiv.innerHTML = "";
@@ -45,17 +44,20 @@ function atualizarRanking() {
 
     ranking.forEach((atleta, index) => {
         const media = calcularMedia(atleta.notas);
-        let medalha = "";
-        if(index === 0) medalha = "🥇";
-        else if(index === 1) medalha = "🥈";
-        else if(index === 2) medalha = "🥉";
+        let prefixo = "";
+
+        if(index === 0) prefixo = "🥇";
+        else if(index === 1) prefixo = "🥈";
+        else if(index === 2) prefixo = "🥉";
+        else prefixo = `${index + 1}º.`; // do 4° lugar em diante
 
         const div = document.createElement("div");
         div.className = "card-ranking";
-        div.innerHTML = `${medalha} ${atleta.nome} - ${media.toFixed(5)}`;
+        div.innerHTML = `${prefixo} ${atleta.nome} - ${media.toFixed(2)}`;
         rankingDiv.appendChild(div);
     });
 }
+
 
 // Adicionar atleta
 function adicionarAtleta() {
