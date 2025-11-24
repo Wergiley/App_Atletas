@@ -1,95 +1,91 @@
-// =========================
-// LISTA ESTÁTICA DE ATLETAS (SEUS DADOS)
-// =========================
-
+// Dados iniciais
 let atletas = [
-    {
-        nome: "Cesar Abascal",
-        notas: [10, 10, 7.88, 8.42, 9.34]
-    },
-    {
-        nome: "Fernando Puntel",
-        notas: [10, 10, 7, 8, 9.33]
-    },
-    {
-        nome: "Daiane Jelinsky",
-        notas: [10, 7, 8, 9.5, 9.5]
-    },
-    {
-        nome: "Bruno Castro",
-        notas: [10, 10, 10, 9, 9.5]
-    }
+    { nome: "Cesar Abascal", notas: [10,10,7.88,8.42,9.34] },
+    { nome: "Fernando Puntel", notas: [10,10,7,8,9.33] },
+    { nome: "Daiane Jelinsky", notas: [10,7,8,9.5,9.5] },
+    { nome: "Bruno Castro", notas: [10,10,10,9,9.5] }
 ];
 
-
-// =========================
-// CÁLCULO DA MÉDIA VÁLIDA
-// =========================
-// Remove menor e maior nota e faz a média das 3 restantes.
-
+// Calcula média removendo maior e menor nota
 function calcularMedia(notas) {
-    let ordenadas = [...notas].sort((a, b) => a - b);
-    let meio = ordenadas.slice(1, 4);
-
+    let ordenadas = [...notas].sort((a,b) => a-b);
+    let meio = ordenadas.slice(1,4);
     let soma = meio.reduce((acc, n) => acc + n, 0);
-
     return soma / meio.length;
 }
 
-
-// =========================
-// EXIBIR ATLETAS NA TELA
-// =========================
-
-function exibirAtletas() {
-    let resultado = document.getElementById("resultado");
+// Atualiza a lista de atletas na tela
+function atualizarAtletas() {
+    const resultado = document.getElementById("resultado");
     resultado.innerHTML = "<h3>Atletas cadastrados:</h3>";
 
-    atletas.forEach(atleta => {
-        let media = calcularMedia(atleta.notas);
-
-        let card = document.createElement("div");
+    atletas.forEach((atleta, index) => {
+        const media = calcularMedia(atleta.notas);
+        const card = document.createElement("div");
         card.className = "card";
-
         card.innerHTML = `
             <p class="nome">Atleta: ${atleta.nome}</p>
             <p class="notas">Notas Obtidas: ${atleta.notas.join(", ")}</p>
             <p>Média Válida: ${media.toFixed(5)}</p>
+            <button class="btn-excluir" onclick="excluirAtleta(${index})">Excluir</button>
         `;
-
         resultado.appendChild(card);
+    });
+
+    atualizarRanking();
+}
+
+// Ranking lateral
+function atualizarRanking() {
+    const rankingDiv = document.getElementById("ranking-list");
+    rankingDiv.innerHTML = "";
+
+    // Ordena por média
+    const ranking = [...atletas].sort((a,b) => calcularMedia(b.notas) - calcularMedia(a.notas));
+
+    ranking.forEach((atleta, index) => {
+        const media = calcularMedia(atleta.notas);
+        let medalha = "";
+        if(index === 0) medalha = "🥇";
+        else if(index === 1) medalha = "🥈";
+        else if(index === 2) medalha = "🥉";
+
+        const div = document.createElement("div");
+        div.className = "card-ranking";
+        div.innerHTML = `${medalha} ${atleta.nome} - ${media.toFixed(5)}`;
+        rankingDiv.appendChild(div);
     });
 }
 
-
-// =========================
-// ADICIONAR NOVO ATLETA
-// =========================
-
+// Adicionar atleta
 function adicionarAtleta() {
-    let nome = document.getElementById("nome").value;
-    let notasInput = document.getElementById("notas").value;
+    const nome = document.getElementById("nome").value;
+    const notasInput = document.getElementById("notas").value;
 
-    if (!nome || !notasInput) {
+    if(!nome || !notasInput) {
         alert("Preencha todos os campos!");
         return;
     }
 
-    let notas = notasInput.split(",").map(n => parseFloat(n.trim()));
-
-    if (notas.length !== 5 || notas.some(n => isNaN(n))) {
-        alert("Digite exatamente 5 notas válidas!");
+    const notas = notasInput.split(",").map(n => parseFloat(n.trim()));
+    if(notas.length !== 5) {
+        alert("Digite exatamente 5 notas!");
         return;
     }
 
     atletas.push({ nome, notas });
 
-    exibirAtletas();
-
     document.getElementById("nome").value = "";
     document.getElementById("notas").value = "";
+
+    atualizarAtletas();
 }
 
+// Excluir atleta
+function excluirAtleta(index) {
+    atletas.splice(index,1);
+    atualizarAtletas();
+}
 
-// Exibir lista inicial ao carregar
-window.onload = exibirAtletas;
+// Inicializa lista
+atualizarAtletas();

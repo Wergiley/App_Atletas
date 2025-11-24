@@ -9,22 +9,28 @@
 
 <h1>Avaliação de Atletas</h1>
 
-<div class="container">
+<div class="main-container">
 
-    <label>Nome do Atleta:</label>
-    <input type="text" id="nome">
+    <!-- Formulário de cadastro -->
+    <div class="container">
+        <label>Nome do Atleta:</label>
+        <input type="text" id="nome">
 
-    <label>Notas (5 valores separados por vírgula):</label>
-    <input type="text" id="notas" placeholder="Ex: 10, 9.5, 8, 9, 10">
+        <label>Notas (5 valores separados por vírgula):</label>
+        <input type="text" id="notas" placeholder="Ex: 10, 9.5, 8, 9, 10">
 
-    <button onclick="adicionarAtleta()">Adicionar Atleta</button>
+        <button onclick="adicionarAtleta()">Adicionar Atleta</button>
 
-    <div class="resultado" id="resultado">
-        <h3>Atletas cadastrados:</h3>
+        <div class="resultado" id="resultado">
+            <h3>Atletas cadastrados:</h3>
+        </div>
     </div>
 
-</div>
-
+    <!-- Ranking lateral -->
+    <div class="ranking" id="ranking">
+        <h3>Ranking</h3>
+        <div id="ranking-list"></div>
+    </div>
 <script src="script.js"></script>
 </body>
 </html>
