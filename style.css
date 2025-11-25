@@ -29,7 +29,7 @@ h1 {
     display: flex;
     gap: 30px;
     width: 100%;
-    max-width: 900px;
+    max-width: 1000px;
     justify-content: center;
 }
 
@@ -43,6 +43,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    border-top: 5px solid #4c52ff;
 }
 
 label {
@@ -92,7 +93,7 @@ button:active {
 
 /* Área de resultados */
 .resultado {
-    margin-top: 15px;
+    margin-top: 0px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -107,7 +108,7 @@ button:active {
     font-size: 20px;
     margin-bottom: 0px;
     margin-top: 0px;
-     border-top: 5px solid #4c82ff;
+     border-top: 5px solid #4c52ff;
 }
 
 
@@ -143,6 +144,7 @@ button:active {
 /* Botão de excluir no card */
 .btn-excluir {
     align-self: flex-end;
+    margin-top: 15px;
     padding: 5px 10px;
     border-radius: 8px;
     background: #ff4c4c;
@@ -174,11 +176,11 @@ button:active {
 }
 
 .resultado {
-    width: 35%;
+    width: 30%;
 }
 
 .ranking {
-    width: 25%;
+    width: 40%;
 }
 
 /* Ranking lateral */
@@ -186,20 +188,25 @@ button:active {
     flex: 0.4;
     background: rgba(255,255,255,0.9);
     padding: 15px;
+    padding-top: 10px;
     border-radius: 14px;
     height: fit-content;
     box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    border-top: 5px solid #4c6dff;
 }
 .card-ranking {
-    padding: 8px;
-    margin-bottom: 6px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    margin: 0 0 5px 0;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     font-weight: 600;
     font-size: 14px;
-     border-left: 5px solid #4c82ff;
+    border-left: 5px solid #4c82ff;
 }
+
 .ranking h3 {
     font-size: 20px;
     font-weight: 700;
@@ -214,6 +221,26 @@ button:active {
 .card p strong {
     color: #111;
 }
+
+/* Organiza nome em cima e média embaixo no ranking */
+.card-ranking {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.rk-nome {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+}
+
+.rk-media {
+    font-size: 14px;
+    color: #444;
+}
+
 
 /* =========================
    RESPONSIVIDADE REAL DOS ELEMENTOS NA TELA

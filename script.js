@@ -104,7 +104,9 @@ function atualizarRanking() {
 
         const div = document.createElement("div");
         div.className = "card-ranking";
-        div.innerHTML = `${prefixo} ${atleta.nome} - ${atleta.obtemMediaValida().toFixed(2)}`;
+        div.innerHTML = `<div class="rk-nome">${prefixo} ${atleta.nome}</div>
+        <div class="rk-media">Média: ${atleta.obtemMediaValida().toFixed(2)}</div>`;
+
 
         rankingDiv.appendChild(div);
     });
