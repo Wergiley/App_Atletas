@@ -256,6 +256,18 @@ img {
     border: 2px solid #ddd;
 }
 
+.rodape {
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    padding: 25px 10px;
+    background: linear-gradient(135deg, #007bff, #00d9ff);
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
 
 /* =========================
    RESPONSIVIDADE REAL DOS ELEMENTOS NA TELA
