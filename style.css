@@ -241,6 +241,21 @@ button:active {
     color: #444;
 }
 
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.foto-atleta {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 10px auto;
+    border: 2px solid #ddd;
+}
+
 
 /* =========================
    RESPONSIVIDADE REAL DOS ELEMENTOS NA TELA
