@@ -98,6 +98,19 @@ button:active {
     gap: 10px;
 }
 
+/* Título da seção "Atletas cadastrados" */
+.resultado h3 {
+    color: #000000;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+     border-top: 5px solid #4c82ff;
+}
+
+
 /* Card do atleta */
 .card {
     background: #f8faff;
@@ -148,13 +161,27 @@ button:active {
 /* Container principal: formulário + ranking lateral */
 .main-container {
     display: flex;
+    justify-content: space-between;
     gap: 20px;
-    justify-content: center;
+    width: 95%;
     align-items: flex-start;
-    flex-wrap: wrap; /* ranking abaixo em telas pequenas */
+    margin: auto;
 }
 
-/* Ranking lateral - opcional futura implementação */
+/* Ajusta largura das 3 colunas */
+.container {
+    width: 30%;
+}
+
+.resultado {
+    width: 35%;
+}
+
+.ranking {
+    width: 25%;
+}
+
+/* Ranking lateral */
 .ranking {
     flex: 0.4;
     background: rgba(255,255,255,0.9);
@@ -171,17 +198,99 @@ button:active {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     font-weight: 600;
     font-size: 14px;
+     border-left: 5px solid #4c82ff;
 }
-/* Responsividade */
-@media (max-width: 900px) {
+.ranking h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.card p {
+    font-size: 15px;
+    color: #333;
+}
+.card p strong {
+    color: #111;
+}
+
+/* =========================
+   RESPONSIVIDADE REAL DOS ELEMENTOS NA TELA
+   ========================= */
+
+/* Tablet (entre 720px e 1023px) → Duas colunas */
+@media (max-width: 1023px) {
     .main-container {
         flex-direction: column;
+        width: 100%;
+        max-width: 700px;
         align-items: center;
+    }
+
+    .container,
+    .resultado {
+        width: 100%;
     }
 
     .ranking {
         width: 100%;
-        max-width: 400px;
         margin-top: 20px;
     }
 }
+
+/* Celulares grandes (até 719px) → Layout em coluna */
+@media (max-width: 719px) {
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .container,
+    .resultado,
+    .ranking {
+        width: 100%;
+    }
+
+    .card,
+    .card-ranking {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 15px;
+    }
+}
+
+/* Celulares pequenos (até 480px) → otimização extra */
+@media (max-width: 480px) {
+    .container,
+    .resultado,
+    .ranking {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    input, button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .card-ranking {
+        padding: 6px;
+        font-size: 13px;
+    }
+}
+

@@ -16,17 +16,28 @@
         <label>Nome do Atleta:</label>
         <input type="text" id="nome">
 
-        <label>Notas (5 valores separados por vírgula):</label>
-        <input type="text" id="notas" placeholder="Ex: 10, 9.5, 8, 9, 10">
+        <label>Notas (5 valores):</label>
+        <input type="text" id="notas" placeholder="Ex: 10, 9.5, 8.9, 9, 10">
+
+        <label>Idade:</label>
+        <input type="number" id="idade" placeholder="Ex: 25">
+
+        <label>Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ex: 70.4">
+
+        <label>Altura (ex: 1.75):</label>
+        <input type="number" step="0.01" id="altura" placeholder="Ex: 1.75">
 
         <button onclick="adicionarAtleta()">Adicionar Atleta</button>
 
-        <div class="resultado" id="resultado">
-            <h3>Atletas cadastrados:</h3>
-        </div>
     </div>
 
-    <!-- Ranking lateral -->
+    <!-- COLUNA 2 – ATLETAS CADASTRADOS -->
+    <div class="resultado" id="resultado">
+        <h3>Atletas Cadastrados:</h3>
+    </div>
+
+    <!-- COLUNA 3 – RANKING -->
     <div class="ranking" id="ranking">
         <h3>Ranking</h3>
         <div id="ranking-list"></div>
